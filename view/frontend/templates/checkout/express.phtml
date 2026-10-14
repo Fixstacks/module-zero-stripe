@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright © 2026 Roman Pasichnyk
+ * SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+ *
+ * Stripe Express Checkout (Google Pay / Apple Pay) above the payment methods.
+ * Hidden by inline style until checkout-stripe.js learns the browser has a
+ * wallet (`availablepaymentmethodschange`). Apple Pay needs the domain
+ * verified in Stripe.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Zero\Stripe\ViewModel\CheckoutConfig $stripeConfig
+ */
+$stripeConfig = $block->getData('stripeConfig');
+if ($stripeConfig->getPublishableKey() === null) {
+    return;
+}
+?>
+<div id="stripe-express-checkout-wrap" class="flex-col gap-3 mb-2" style="display:none">
+    <div id="stripe-express-checkout"></div>
+    <div class="flex items-center gap-3 text-xs text-base-content/60">
+        <span class="flex-1 border-t border-base-300"></span>
+        <span><?= $escaper->escapeHtml(__('or choose a payment method')) ?></span>
+        <span class="flex-1 border-t border-base-300"></span>
+    </div>
+</div>

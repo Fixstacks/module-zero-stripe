@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2026 Roman Pasichnyk
+ * SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+ *
+ * Hosts Stripe.js and the Payment Element load from (Stripe's CSP guide).
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="stripe-js-stripe-com" type="host">https://js.stripe.com</value>
+                <value id="stripe-any-js-stripe-com" type="host">https://*.js.stripe.com</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="stripe-js-stripe-com" type="host">https://js.stripe.com</value>
+                <value id="stripe-any-js-stripe-com" type="host">https://*.js.stripe.com</value>
+                <value id="stripe-hooks-stripe-com" type="host">https://hooks.stripe.com</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="stripe-api-stripe-com" type="host">https://api.stripe.com</value>
+                <value id="stripe-any-stripe-com" type="host">https://*.stripe.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="stripe-any-stripe-com" type="host">https://*.stripe.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

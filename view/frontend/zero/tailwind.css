@@ -1,0 +1,37 @@
+/**
+ * Copyright © 2026 Roman Pasichnyk
+ * SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+ *
+ * Picked up by the Zero theme build (scripts/collect-module-styles.mjs)
+ * while Zero_Stripe is enabled: Tailwind builds the classes its templates use.
+ */
+@source "../templates/**/*.phtml";
+
+/* The Payment Element and Express Checkout panels (checkout/*.phtml): shown by a `:has()` rule on the payment method radios. */
+@layer components {
+    #stripe-payment-element {
+        display: none;
+    }
+
+    #payment-methods:has(input[value="zero_stripe"]:checked) ~ #stripe-payment-element {
+        display: block;
+    }
+
+    /* Defensive width rule for Stripe's mounted iframes — belt-and-suspenders against a reported (not locally reproduced) narrow-rendering issue on mobile. */
+    #stripe-element-mount iframe,
+    #stripe-express-checkout iframe {
+        width: 100% !important;
+    }
+
+    /*
+     * The Express Checkout Element's wrapper/mount divs need a width limit too
+     * (the iframe rule above only sizes the iframe), or the Google Pay button
+     * overflows the narrow checkout column.
+     */
+    #stripe-express-checkout-wrap,
+    #stripe-express-checkout {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+    Copyright © 2026 Roman Pasichnyk
+    SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+
+    Stripe has one account with test and live key pairs (pk_/sk_test_ vs
+    pk_/sk_live_); Test Mode picks which pair Model\Config returns.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="zero_stripe" translate="label" type="text" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Credit Card (Stripe)</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                </field>
+                <field id="test_mode" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1">
+                    <label>Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="test_publishable_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Test Publishable Key</label>
+                    <comment>pk_test_...</comment>
+                </field>
+                <field id="test_secret_key" translate="label" type="obscure" sortOrder="21" showInDefault="1" showInWebsite="1">
+                    <label>Test Secret Key</label>
+                    <comment>sk_test_...</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="live_publishable_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1">
+                    <label>Live Publishable Key</label>
+                    <comment>pk_live_...</comment>
+                </field>
+                <field id="live_secret_key" translate="label" type="obscure" sortOrder="31" showInDefault="1" showInWebsite="1">
+                    <label>Live Secret Key</label>
+                    <comment>sk_live_...</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="50" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="51" showInDefault="1" showInWebsite="1">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

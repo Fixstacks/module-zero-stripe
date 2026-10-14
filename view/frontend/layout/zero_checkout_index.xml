@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+    Copyright © 2026 Roman Pasichnyk
+    SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+
+    Plugs Stripe into Zero Checkout's payment step: wallet buttons above the
+    method list, the card form below it. Disabling Zero_Stripe removes both.
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="zero.checkout.payment.express">
+            <block class="Magento\Framework\View\Element\Template" name="zero.checkout.payment.stripe.express"
+                   template="Zero_Stripe::checkout/express.phtml">
+                <arguments>
+                    <argument name="stripeConfig" xsi:type="object">Zero\Stripe\ViewModel\CheckoutConfig</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="zero.checkout.payment.forms">
+            <block class="Magento\Framework\View\Element\Template" name="zero.checkout.payment.stripe"
+                   template="Zero_Stripe::checkout/payment-element.phtml">
+                <arguments>
+                    <argument name="stripeConfig" xsi:type="object">Zero\Stripe\ViewModel\CheckoutConfig</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

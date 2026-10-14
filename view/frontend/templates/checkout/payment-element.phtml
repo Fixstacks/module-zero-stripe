@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © 2026 Roman Pasichnyk
+ * SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+ *
+ * Stripe Payment Element, shown by a `#payment-methods:has(...) ~` rule: keep
+ * it a sibling of #payment-methods. checkout-stripe.js confirms the
+ * PaymentIntent and fills `stripe_payment_intent_id`; Model\Standard::capture()
+ * re-verifies status, amount and quote.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Zero\Stripe\ViewModel\CheckoutConfig $stripeConfig
+ */
+$stripeConfig = $block->getData('stripeConfig');
+$publishableKey = $stripeConfig->getPublishableKey();
+if ($publishableKey === null) {
+    return;
+}
+?>
+<div id="stripe-payment-element" class="rounded-field border border-base-300 p-4">
+    <div id="stripe-element-mount"></div>
+    <div id="stripe-error" class="text-error text-sm mt-2 hidden" role="alert"></div>
+    <input type="hidden" name="stripe_payment_intent_id" id="stripe_payment_intent_id" />
+</div>
+<script src="https://js.stripe.com/v3/"></script>
+<script type="application/json" id="zero-stripe-config"><?= /* @noEscape */ json_encode([
+    'publishableKey' => $publishableKey,
+    'intentUrl' => $block->getUrl('zero_stripe/standard/intent'),
+]) ?></script>
+<script src="<?= $escaper->escapeUrl($block->getViewFileUrl('Zero_Stripe::js/checkout-stripe.js')) ?>" defer></script>
