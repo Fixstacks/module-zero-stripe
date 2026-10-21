@@ -1,4 +1,4 @@
-# fixstacks/module-zero-stripe — licensing
+# zerofront/module-zero-stripe — licensing
 
 Copyright © 2026 Roman Pasichnyk.
 
